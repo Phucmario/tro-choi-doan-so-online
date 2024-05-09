@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+    <title>Game đoán số</title>
+</head>
+<body>
+    <h1>Game đoán số</h1>
+    <h2>Vòng : {{ round_count }}</h2>
+    
+    {% if not game_over %}
+        <form action="/" method="post">
+            <label for="player">Tên người chơi:</label>
+            <input type="text" id="player" name="player" required>
+            <br>
+            <label for="guess">Số của bạn:</label>
+            <input type="number" id="guess" name="guess" required>
+            <br>
+            <input type="submit" value="Đoán">
+        </form>
+        <hr>
+        <h2>Kết quả:</h2>
+        <p>{{ message }}</p>
+        
+    {% else %}
+    <h2>Trò chơi đã kết thúc.</h2>
+    {% if winner %}
+        <p>Người chiến thắng: {{ winner }}</p>
+    {% else %}
+        <p>Không có người chiến thắng.</p>
+    {% endif %}
+    {% if game_over and winner %}
+    <form action="/restart" method="GET">
+        <input type="submit" value="Bắt đầu lại">
+    </form>
+{% endif %}
+    {% endif %}
+    
+    
+    <h2>Danh sách người chơi và điểm:</h2>
+    <ul>
+        {% for player, score in players.items() %}
+            <li>{{ player }}: {{ score }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
