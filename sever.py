@@ -58,4 +58,4 @@ def restart_game():
     return render_template('index.html', players=players, winner=winner, game_over=game_over, round_count=round_count)
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0')
+    app.run(host='0.0.0.1')
