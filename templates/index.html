@@ -6,7 +6,7 @@
 </head>
 <body>
     <h1>Game đoán số</h1>
-    <h2>Vòng : {{ round_count }}</h2>
+    <h2 class="Vòng">Vòng : {{ round_count }}</h2>
     
     {% if not game_over %}
         <form action="/" method="post">
@@ -19,15 +19,15 @@
             <input type="submit" value="Đoán">
         </form>
         <hr>
-        <h2>Kết quả:</h2>
-        <p>{{ message }}</p>
+        <h2 class="score">Kết quả:</h2>
+        <p class="message">{{ message }}</p>
         
     {% else %}
-    <h2>Trò chơi đã kết thúc.</h2>
+    <h2 class="finish">Trò chơi đã kết thúc.</h2>
     {% if winner %}
-        <p>Người chiến thắng: {{ winner }}</p>
+        <p class="Win">Người chiến thắng: {{ winner }}</p>
     {% else %}
-        <p>Không có người chiến thắng.</p>
+        <p class="Lose">Không có người chiến thắng.</p>
     {% endif %}
     {% if game_over and winner %}
     <form action="/restart" method="GET">
@@ -37,7 +37,7 @@
     {% endif %}
     
     
-    <h2>Danh sách người chơi và điểm:</h2>
+    <h2 class="list">Danh sách người chơi và điểm:</h2>
     <ul>
         {% for player, score in players.items() %}
             <li>{{ player }}: {{ score }}</li>

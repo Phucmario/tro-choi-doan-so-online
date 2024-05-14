@@ -1,11 +1,22 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
+    background: linear-gradient(to right, #f06, #a6e);
     text-align: center;
 }
 
 h1 {
-    color: #333;
+    background: linear-gradient(to right, #eb0000, #e1de0a);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+.Vòng {
+    background: linear-gradient(to right, #006eeb, #ce06e4);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+label{
+    font-weight: bold;
+    color: #ebeb00;
 }
 
 .container {
@@ -22,49 +33,67 @@ h1 {
     margin-bottom: 20px;
 }
 
-.form-container input[type="text"],
-.form-container input[type="number"] {
+ input[type="text"],
+ input[type="number"] {
     width: 200px;
     padding: 10px;
     margin-bottom: 10px;
     border-radius: 5px;
-    border: 1px solid #ccc;
+    border: 1px solid #000000;
 }
 
-.form-container input[type="submit"] {
-    background-color: #4caf50;
-    color: #fff;
-    cursor: pointer;
-    border: none;
+input[type="submit"] {
+width: 15%;  
+background-color: #fa0707;  
+color: white;  
+padding: 16px 32px;  
+margin-bottom: 10px;  
+border: none;  
+border-radius: 4px;  
+cursor: pointer;
 }
 
-.form-container input[type="submit"]:hover {
-    background-color: #45a049;
+input[type="submit"]:hover {
+    background-color: #2bf702;
 }
 
 .message {
+    font-weight: bold;
     margin-top: 20px;
-    color: #333;
+    color: #00fde4;
 }
 
-.scoreboard {
-    margin-top: 20px;
-    text-align: left;
+.score{
+    background: linear-gradient(to right, #eafb00, #2ae10a);
+    -webkit-background-clip: text;
+    color: transparent;
 }
 
-.scoreboard h2 {
-    font-size: 20px;
-    margin-bottom: 10px;
-    color: #333;
+.list{
+    background: linear-gradient(to right, #eafb00, #2ae10a);
+    -webkit-background-clip: text;
+    color: transparent;
 }
 
-.scoreboard ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+.finish{
+    background: linear-gradient(to right, #eafb00, #2ae10a);
+    -webkit-background-clip: text;
+    color: transparent;
 }
 
-.scoreboard li {
-    margin-bottom: 5px;
-    color: #555;
+.Win{
+    font-weight: bold;
+    color: #00fd15;
+}
+
+.Lose{
+    font-weight: bold;
+    color: #b51308;
+}
+
+li{
+    font-weight: bold;
+    background: linear-gradient(to right, #00ebd0, #060de4);
+    -webkit-background-clip: text;
+    color: transparent;
 }
