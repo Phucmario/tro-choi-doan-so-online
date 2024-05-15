@@ -66,6 +66,10 @@
             messagesDiv.appendChild(newMessage);
         });
 
+        socket.on('refresh', function() {
+            location.reload();  // Refresh the page
+        });
+       
         var chatForm = document.getElementById('chat-form');
         chatForm.addEventListener('submit', function(event) {
             event.preventDefault();
