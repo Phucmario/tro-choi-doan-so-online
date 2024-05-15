@@ -3,13 +3,14 @@
 <head>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
     <title>Game đoán số</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
     <h1>Game đoán số</h1>
-    <h2 class="Vòng">Vòng : {{ round_count }}</h2>
+    
     
     {% if not game_over %}
-        <form action="/" method="post">
+        <form id="guess-form">
             <label for="player">Tên người chơi:</label>
             <input type="text" id="player" name="player" required>
             <br>
@@ -19,32 +20,88 @@
             <input type="submit" value="Đoán">
         </form>
         <hr>
-        <h2 class="score">Kết quả:</h2>
-        <p class="message">{{ message }}</p>
+        <h3>Kết quả:</h3>
+        <p id="message">{{ message }}</p>
         
     {% else %}
-    <h2 class="finish">Trò chơi đã kết thúc.</h2>
-    {% if winner %}
-        <p class="Win">Người chiến thắng: {{ winner }}</p>
-    {% else %}
-        <p class="Lose">Không có người chiến thắng.</p>
-    {% endif %}
-    {% if game_over and winner %}
-    <form action="/restart" method="GET">
-        <input type="submit" value="Bắt đầu lại">
-    </form>
-{% endif %}
+        <h3>Trò chơi đã kết thúc.</h3>
+        {% if winner %}
+            <p>Người chiến thắng: {{ winner }}</p>
+        {% else %}
+            <p>Không có người chiến thắng.</p>
+        {% endif %}
+        {% if game_over and winner %}
+            <form action="/restart" method="GET">
+                <input type="submit" value="Bắt đầu lại">
+            </form>
+        {% endif %}
     {% endif %}
     
-    
-    <h2 class="list">Danh sách người chơi và điểm:</h2>
-    <ul>
+    <h4>Danh sách người chơi và điểm:</h4>
+    <ul id="players">
         {% for player, score in players.items() %}
             <li>{{ player }}: {{ score }}</li>
         {% endfor %}
     </ul>
+
+    <h2>Tin nhắn chat:</h2>
+    <div id="messages">
+        {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    </div>
+
+    <form id="chat-form" action="/" method="post">
+        <input type="text" name="message" id="message-input" placeholder="Nhập tin nhắn...">
+        <button type="submit">Gửi</button>
+    </form>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.2.0/socket.io.js"></script>
+    <script type="text/javascript">
+        var socket = io();
+
+        socket.on('message', function(message) {
+            var messagesDiv = document.getElementById('messages');
+            var newMessage = document.createElement('p');
+            newMessage.innerText = message;
+            messagesDiv.appendChild(newMessage);
+        });
+
+        var chatForm = document.getElementById('chat-form');
+        chatForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            var messageInput = document.getElementById('message-input');
+            var message = messageInput.value;
+            socket.send(message);
+            messageInput.value = '';
+        });
+
+        var guessForm = document.getElementById('guess-form');
+        guessForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            var playerInput = document.getElementById('player');
+            var guessInput = document.getElementById('guess');
+            var player = playerInput.value;
+            var guess = guessInput.value;
+
+            $.ajax({
+                url: '/guess',
+                data: {'player': player, 'guess': guess},
+                type: 'POST',
+                success: function(response) {
+                    document.getElementById('message').innerText = response.message;
+                    var playersList = document.getElementById('players');
+                    playersList.innerHTML = '';
+                    for (var player in response.players) {
+                        var newPlayer = document.createElement('li');
+                        newPlayer.innerText = player + ': ' + response.players[player];
+                        playersList.appendChild(newPlayer);
+                    }
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        });
+    </script>
 </body>
-<div>
-    
-</div>
 </html>
