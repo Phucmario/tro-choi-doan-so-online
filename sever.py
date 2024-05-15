@@ -47,6 +47,7 @@ def guess_number():
             winner = player
             message += f" Người chơi {winner} đã đạt được 5 điểm và trở thành người chiến thắng!"
             game_over = True
+            socketio.emit('refresh') 
 
         target_number = random.randint(1, 3)
         round_count += 1
