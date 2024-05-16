@@ -45,3 +45,14 @@ h4 {
     font-size: x-large;
     font-style: inherit;
 }
+#messages {
+    max-height: 200px; /* Đặt chiều cao tối đa của khung chat */
+    overflow-y: auto; /* Thiết lập thanh cuộn dọc khi nội dung vượt quá chiều cao */
+}
+#chat-form button {
+    background-color: #007bff; /* Màu xanh dương */
+    color: #fff; /* Màu chữ trắng */
+    border: none; /* Loại bỏ viền */
+    padding: 8px 16px; /* Kích thước lề */
+    cursor: pointer; /* Hiển thị con trỏ khi di chuột vào nút */
+}
