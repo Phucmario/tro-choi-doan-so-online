@@ -53,6 +53,7 @@ def guess_number():
         round_count += 1
 
     socketio.emit('message', message)
+    socketio.emit('players_update', players)
 
     return jsonify(message=message, players=players, winner=winner, game_over=game_over, round_count=round_count)
 

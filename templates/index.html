@@ -70,6 +70,24 @@
             location.reload();  // Refresh the page
         });
        
+        socket.on('connect', function() {
+            console.log('Connected to server');
+        });
+
+        socket.on('disconnect', function() {
+            console.log('Disconnected from server');
+        });
+
+        socket.on('message', function(message) {
+            console.log('Message:', message);
+            // Handle the message from the server
+        });
+
+        socket.on('players_update', function(players) {
+            console.log('Players:', players);
+            // Update the player list in the UI
+        });
+        
         var chatForm = document.getElementById('chat-form');
         chatForm.addEventListener('submit', function(event) {
             event.preventDefault();
