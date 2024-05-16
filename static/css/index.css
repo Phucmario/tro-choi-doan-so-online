@@ -48,6 +48,7 @@ h4 {
 #messages {
     max-height: 200px; /* Đặt chiều cao tối đa của khung chat */
     overflow-y: auto; /* Thiết lập thanh cuộn dọc khi nội dung vượt quá chiều cao */
+    
 }
 #chat-form button {
     background-color: #007bff; /* Màu xanh dương */

@@ -8,7 +8,7 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret_key'
 socketio = SocketIO(app)
 
-target_number = random.randint(1, 3)
+target_number = random.randint(1, 100)
 players = {}
 first_guess_times = {}
 winner = None
@@ -49,11 +49,10 @@ def guess_number():
             game_over = True
             socketio.emit('refresh') 
 
-        target_number = random.randint(1, 3)
+        target_number = random.randint(1, 100)
         round_count += 1
 
     socketio.emit('message', message)
-    socketio.emit('players_update', players)
 
     return jsonify(message=message, players=players, winner=winner, game_over=game_over, round_count=round_count)
 
@@ -61,7 +60,7 @@ def guess_number():
 def restart_game():
     global target_number, winner, game_over, round_count, players, first_guess_times
 
-    target_number = random.randint(1, 3)
+    target_number = random.randint(1, 100)
     players = {}
     first_guess_times = {}
     winner = None
