@@ -3,7 +3,7 @@ import random
 import time
 
 app = Flask(__name__)
-target_number = random.randint(1, 3)
+target_number = random.randint(1, 100)
 players = {}  # Số người chơi và điểm của họ
 first_guess_times = {}  # Thời điểm đoán đầu tiên của mỗi người chơi
 winner = None  # Người chiến thắng
@@ -38,7 +38,7 @@ def guess_number():
                 message += f" Người chơi {winner} đã đạt được 5 điểm và trở thành người chiến thắng!"
                 game_over = True
 
-            target_number = random.randint(1, 3)  # Sinh số mới
+            target_number = random.randint(1, 100)  # Sinh số mới
             round_count += 1  # Tăng số vòng chơi
 
         return render_template('index.html', message=message, players=players, winner=winner, game_over=game_over, round_count=round_count)
@@ -48,7 +48,7 @@ def guess_number():
 def restart_game():
     global target_number, winner, game_over, round_count, players, first_guess_times
 
-    target_number = random.randint(1, 3)
+    target_number = random.randint(1, 100)
     players = {}
     first_guess_times = {}
     winner = None
