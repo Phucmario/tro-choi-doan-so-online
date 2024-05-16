@@ -76,3 +76,4 @@ def handle_message(message):
 if __name__ == '__main__':
     print(f"Server is running at http://{host_ip}:5000")
     socketio.run(app, host='0.0.0.0')
+    
